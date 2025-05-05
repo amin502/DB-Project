@@ -1,8 +1,8 @@
 -- Users
-INSERT INTO Users (UserID, Name, Email, Phone)
+INSERT INTO Users (FirstName, LastName, Email, PhoneNumber, PasswordHash, Role)
 VALUES
-(1, 'Ali Rezaei', 'ali@example.com', '09121234567'),
-(2, 'Sara Ahmadi', 'sara@example.com', '09127654321');
+('Ali', 'Rezaei', 'ali@example.com', '09121234567', 'hashedpass1', 'Passenger'),
+('Sara', 'Ahmadi', 'sara@example.com', '09127654321', 'hashedpass2', 'Admin');
 
 -- Tickets
 INSERT INTO Tickets (TicketID, UserID, EventName, EventDate, SeatNumber, Price)
