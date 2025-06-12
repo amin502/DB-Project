@@ -1,0 +1,29 @@
+﻿@model TicketSystem.Models.SignupViewModel
+
+<h3>ثبت‌نام کاربر جدید</h3>
+<form asp-action="Signup" method="post">
+    <div class="form-group">
+        <label>نام و نام خانوادگی</label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>شماره تلفن</label>
+        <input asp-for="PhoneNumber" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>ایمیل</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>جنسیت</label>
+        <select asp-for="Gender" class="form-control">
+            <option value="مرد">مرد</option>
+            <option value="زن">زن</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">تأیید و ادامه</button>
+</form>

@@ -1,0 +1,51 @@
+﻿@model List<TicketSystem.Models.Reservation>
+
+@{
+    ViewData["Title"] = "رزروهای من";
+}
+
+<h3 class="mt-4 mb-3">رزروهای من</h3>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info">هیچ رزروی انجام نشده است.</div>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>مبدا</th>
+                <th>مقصد</th>
+                <th>تاریخ حرکت</th>
+                <th>وضعیت</th>
+                <th>تاریخ رزرو</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.Ticket.Origin</td>
+                    <td>@r.Ticket.Destination</td>
+                    <td>@r.Ticket.TravelDate.ToShortDateString()</td>
+                    <td>@r.Status</td>
+                    <td>@r.ReservedAt.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>
+                        @if (r.Status != "Paid")
+                        {
+                            <form method="post" asp-action="PayReservation" asp-route-id="@r.Id" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-primary">پرداخت</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="text-success">پرداخت شده</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

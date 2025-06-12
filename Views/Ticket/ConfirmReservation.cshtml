@@ -1,0 +1,14 @@
+﻿@model TicketSystem.Models.ReserveTicketViewModel
+
+<h3>تأیید رزرو بلیت</h3>
+
+<div class="border p-3 rounded bg-light">
+    <p>از <strong>@Model.Origin</strong> به <strong>@Model.Destination</strong></p>
+    <p>تاریخ حرکت: @Model.TravelDate.ToShortDateString()</p>
+    <p>قیمت: @Model.Price تومان</p>
+
+    <form method="post" asp-action="ConfirmReservation">
+        <input type="hidden" name="ticketId" value="@Model.TicketId" />
+        <button type="submit" class="btn btn-success">تأیید و رزرو</button>
+    </form>
+</div>

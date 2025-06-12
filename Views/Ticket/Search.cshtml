@@ -1,0 +1,77 @@
+﻿@model List<TicketSystem.Models.Ticket>
+
+<h2>جستجوی بلیت</h2>
+
+<form method="get" asp-controller="Ticket" asp-action="Search" class="row g-3">
+    
+        <div class="form-group">
+            <label>مبدأ</label>
+            <select name="origin" class="form-control">
+                <option value="">انتخاب کنید</option>
+                @foreach (var city in ViewBag.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>مقصد</label>
+            <select name="destination" class="form-control">
+                <option value="">انتخاب کنید</option>
+                @foreach (var city in ViewBag.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>تاریخ حرکت</label>
+            <input type="date" name="travelDate" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">جستجو</button>
+    
+   
+</form>
+
+<hr />
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>مبدا</th>
+                <th>مقصد</th>
+                <th>تاریخ حرکت</th>
+                <th>قیمت</th>
+                <th>ظرفیت</th>
+                <th>عملیات</th> <!-- ستون رزرو -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.Origin</td>
+                    <td>@ticket.Destination</td>
+                    <td>@ticket.TravelDate.ToShortDateString()</td>
+                    <td>@ticket.Price تومان</td>
+                    <td>@ticket.Capacity</td>
+                    <td>
+                        <a asp-controller="Ticket"
+                           asp-action="Reserve"
+                           asp-route-ticketId="@ticket.Id"
+                           class="btn btn-sm btn-success">رزرو</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>هیچ بلیتی پیدا نشد.</p>
+}

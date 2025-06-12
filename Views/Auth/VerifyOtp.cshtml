@@ -1,0 +1,9 @@
+﻿<h3>کد تایید را وارد کنید</h3>
+<form asp-action="VerifyOtp" method="post">
+    <input type="text" name="otpCode" class="form-control" placeholder="کد تایید" />
+    <button type="submit" class="btn btn-success mt-2">ورود</button>
+</form>
+@if (!ViewData.ModelState.IsValid)
+{
+    <p class="text-danger">کد نادرست است.</p>
+}
